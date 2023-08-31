@@ -234,12 +234,15 @@
   }
 
   // Function to generate the link
+  let generatedLinkText = "";
 
   function generateLink() {
     const randomString = generateRandomString(3);
     const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
     const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
     generatedLink = link; // Store the link for display
+     generatedLinkText = generatedLink;
+
   }
 
   // Function to close the modal
@@ -261,12 +264,22 @@
     return dateTime.toLocaleString("en-US", options);
   }
   let formatedDateTime = [];
-  let orgiginalDateTime="0"
-  let originalDateTime
+  let orgiginalDateTime = "0";
+  let originalDateTime;
   const formattedDateTime = formatDateTime(originalDateTime);
   console.log(formattedDateTime);
-
-
+  
+  
+let pop = false
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(generatedLinkText);
+      console.log('Content copied to clipboard');
+      pop = true
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
 </script>
 
 <Nav />
@@ -299,18 +312,33 @@
             aria-label="Close"
             class="close"
           />
-          Your link:
+          <h2>Beep boop beep! 🤖 Your link is ready!</h2>
         </header>
-        <h2>
+        {#if pop}
+        <p class="pop">Link copied to clipboard!</p>
+        {/if}
+        <h4>
           <a
             href={`${generatedLink}`}
             target="_blank"
             rel="noopener noreferrer"
+            id="myInput"
+            on:click|preventDefault={copyContent}
           >
             {`${generatedLink}`}
           </a>
-        </h2>
+        </h4>
       </article>
     </dialog>
   {/if}
 </div>
+
+<style>
+  .pop {
+    border-radius: 5px;
+    background-color: var(--primary);
+    color: var(--primary-inverse);
+    padding: 1rem;
+    transition: ease-in-out;
+  }
+</style>

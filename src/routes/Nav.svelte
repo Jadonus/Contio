@@ -27,5 +27,13 @@
     }
 a:hover {
 }
+html{
+    max-width: 100%;
+    overflow-x: hidden;
+
+}
+::-webkit-scrollbar {
+    display: none;
+}
 </style>
 </html>
