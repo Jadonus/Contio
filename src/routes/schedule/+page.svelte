@@ -1,230 +1,56 @@
 <script>
+
   import Nav from "../Nav.svelte";
   import { onMount } from "svelte";
 
   // Array to store the submitted dates
   let submittedDates = [];
   let generatedLink = "";
-
+let submootedDates = [];
   // Function to handle date submission
   function submitDate(event) {
     const selectedDateTime = event.target.value;
-    if (selectedDateTime && !submittedDates.includes(selectedDateTime)) {
+
+    // Check if the input is not empty and not the default empty value
+    if (selectedDateTime && selectedDateTime !== "1970-01-01T00:00") {
       submittedDates = [...submittedDates, selectedDateTime];
+
+      // Format the newly submitted date and add it to the formattedDates array
+      const formattedDate = formatDateTime(selectedDateTime);
+      formattedDates = [...formattedDates, formattedDate];
+
+      event.target.value = ""; // Clear the input after adding
     }
   }
 
-  onMount(() => {
-    const dateInput = document.querySelector('input[type="datetime-local"]');
-    dateInput.addEventListener("change", submitDate);
-  });
+ function formatDateTime(dateTimeString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    const dateTime = new Date(dateTimeString);
+    return dateTime.toLocaleString('en-US', options);
+  }
+  let formattedDates = submittedDates.map(date => formatDateTime(date));
+
+
+
+
+let dateInput;
+onMount(() => {
+  dateInput = document.querySelector('input[type="datetime-local"]');
+  dateInput.min = new Date().toISOString().slice(0, 16);
+  dateInput.addEventListener("blur", submitDate);
+
+
+
+});
+
+
+
 
   // Function to generate a random string
-  const randomWords = [
-    "Siamese",
-    "Unaired",
-    "Kindness",
-    "Scary",
-    "Unshipped",
-    "Epilepsy",
-    "Sandblast",
-    "Closure",
-    "Devouring",
-    "Litter",
-    "Clad",
-    "Backfire",
-    "Squishy",
-    "Thursday",
-    "Grope",
-    "Unhearing",
-    "Rise",
-    "Steersman",
-    "Parchment",
-    "Spinster",
-    "Glamorous",
-    "Either",
-    "Autism",
-    "Lapdog",
-    "Exposure",
-    "Doorstep",
-    "Nerd",
-    "Slashed",
-    "Rotting",
-    "Submersed",
-    "Dismount",
-    "Surprise",
-    "Duo",
-    "Easel",
-    "Dose",
-    "Frostily",
-    "Unexposed",
-    "Ammonium",
-    "Unguarded",
-    "Botch",
-    "Varmint",
-    "Petite",
-    "Track",
-    "Posting",
-    "Armband",
-    "Amicably",
-    "Blaspheme",
-    "Stylized",
-    "Blurry",
-    "Colossal",
-    "Quarry",
-    "Plant",
-    "Humbly",
-    "Jeep",
-    "Parched",
-    "Bulb",
-    "Litmus",
-    "Unbalance",
-    "Trash",
-    "Faculty",
-    "Woven",
-    "Limes",
-    "Gladly",
-    "Map",
-    "Willed",
-    "Backlit",
-    "Papyrus",
-    "Playhouse",
-    "Unfailing",
-    "Ancient",
-    "Capital",
-    "Bobtail",
-    "Election",
-    "Jackpot",
-    "Rental",
-    "Stoic",
-    "Revisit",
-    "Snub",
-    "Everyday",
-    "Crystal",
-    "Mobster",
-    "Chamber",
-    "Careless",
-    "Device",
-    "Neurotic",
-    "Emerald",
-    "Disabled",
-    "Maximum",
-    "Reviving",
-    "Unearned",
-    "Phantom",
-    "Footwork",
-    "Cruncher",
-    "Disallow",
-    "Steed",
-    "Supermom",
-    "Shifter",
-    "Panther",
-    "Cofounder",
-    "Anime",
-    "Exfoliate",
-    "Backtrack",
-    "Runaround",
-    "Undoing",
-    "Projector",
-    "Canary",
-    "Irate",
-    "Registry",
-    "Amaze",
-    "Empty",
-    "Curing",
-    "Overstate",
-    "Decent",
-    "Trunks",
-    "Praising",
-    "Oblong",
-    "Playtime",
-    "Aflame",
-    "Compile",
-    "Underfoot",
-    "Aftermost",
-    "Until",
-    "Dice",
-    "Paternal",
-    "Tycoon",
-    "Yonder",
-    "Embezzle",
-    "Player",
-    "Gradient",
-    "Driver",
-    "Deviancy",
-    "Regulate",
-    "Scale",
-    "Epilogue",
-    "Uncross",
-    "Acid",
-    "Spree",
-    "Backstage",
-    "Manor",
-    "Underfoot",
-    "Brute",
-    "French",
-    "Crummiest",
-    "Boney",
-    "Drainage",
-    "Spotted",
-    "Unframed",
-    "Flashcard",
-    "Glimmer",
-    "Bacteria",
-    "Tremor",
-    "Unripe",
-    "Outreach",
-    "Rumble",
-    "Starting",
-    "Encore",
-    "Entrust",
-    "Shrapnel",
-    "Overtime",
-    "Wriggly",
-    "Eligible",
-    "Velcro",
-    "Handed",
-    "Manned",
-    "Scarily",
-    "Handling",
-    "Agony",
-    "Catwalk",
-    "Reaffirm",
-    "Scroll",
-    "Handcraft",
-    "Stinging",
-    "Duckbill",
-    "Penholder",
-    "Escapade",
-    "Vitally",
-    "Sapling",
-    "Immodest",
-    "Senate",
-    "Scaling",
-    "Fiddle",
-    "Ascension",
-    "Felt-tip",
-    "Handheld",
-    "Valid",
-    "Mortally",
-    "Facedown",
-    "Spud",
-    "Antitoxic",
-    "Defuse",
-    "Ferret",
-    "Ninetieth",
-    "Quilt",
-    "Overhead",
-    "Removal",
-    "Guiding",
-    "Wound",
-    "Expire",
-    "Impose",
-    "Reorder",
-  ];
+  const randomWords =["advertise", "arise", "afford", "assumption", "album", "ample", "agile", "attract", "approach", "aquarium", "adviser", "aviation", "automatic", "appear", "applied", "abuse", "adult", "amuse", "architect", "archive", "artist", "articulate", "arrange", "arm", "addition", "arrangement", "astonishing", "absolute", "arrogant", "at", "apparatus", "activate", "aware", "accident", "admission", "asset", "appendix", "appointment", "abundant", "avenue", "annual", "apathy", "adopt", "analysis", "amputate", "attitude", "advantage", "aluminium", "acceptance", "accompany"]
 
   // Function to generate random string from random words
-  function generateRandomString(length) {
+ function generateRandomString(length) {
     let result = "";
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * randomWords.length);
@@ -236,14 +62,44 @@
   // Function to generate the link
   let generatedLinkText = "";
 
-  function generateLink() {
-    const randomString = generateRandomString(3);
-    const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
-    const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
-    generatedLink = link; // Store the link for display
-     generatedLinkText = generatedLink;
+async function makePostRequest(data) {
+  try {
+    const response = await fetch('https://contio-backend.vercel.app/api/submit/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
+    if (response.ok) {
+      console.log('POST request successful!');
+    } else {
+      console.error('POST request failed!');
+    }
+  } catch (error) {
+    console.error('Error while making POST request:', error);
   }
+}
+let email = '' 
+// Inside your generateLink function, after generating the link:
+function generateLink() {
+  const randomString = generateRandomString(3);
+  const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
+  const link = `http://localhost:5173/schedule/${randomString}?${dateParams}`;
+  generatedLink = link; // Store the link for display
+  generatedLinkText = generatedLink;
+
+  // Now, let's create the data to send to your backend
+  const postData = {
+    timeOfRequest: new Date().toISOString(), // Get the current time as ISO string
+    generatedLink: generatedLink,
+    email: email
+  };
+
+  // Make the POST request
+  makePostRequest(postData);
+}
 
   // Function to close the modal
   function closeModal() {
@@ -252,30 +108,14 @@
       modal.removeAttribute("open");
     }
   }
-  function formatDateTime(dateTimeString) {
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    };
-    const dateTime = new Date(dateTimeString);
-    return dateTime.toLocaleString("en-US", options);
-  }
-  let formatedDateTime = [];
-  let orgiginalDateTime = "0";
-  let originalDateTime;
-  const formattedDateTime = formatDateTime(originalDateTime);
-  console.log(formattedDateTime);
-  
-  
-let pop = false
+
+  let pop = false;
+
   const copyContent = async () => {
     try {
       await navigator.clipboard.writeText(generatedLinkText);
       console.log('Content copied to clipboard');
-      pop = true
+      pop = true;
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
@@ -288,18 +128,22 @@ let pop = false
     <h1>When are you available?</h1>
     <h2>Pick a couple times when you are available to meet.</h2>
   </hgroup>
-  <input type="datetime-local" />
+  <div class="grid">
+  <div><input type="datetime-local" min="{new Date().toISOString().slice(0, 16) }" /></div>
+
+  <div><input type="email" bind:value={email} placeholder="Your Email." /></div>
+</div>
 </header>
 
 <div class="container">
   <ul>
-    {#each submittedDates as date}
+    {#each formattedDates as date}
       <li>{date}</li>
     {/each}
   </ul>
 
-  <button role="button" on:click={generateLink}>Generate link from dates</button
-  >
+<button role="button" on:click={generateLink} disabled={!submittedDates.length}>Generate link from dates</button>
+
 
   {#if generatedLink}
     <dialog open>
@@ -333,7 +177,7 @@ let pop = false
   {/if}
 </div>
 
-<style>
+<style lang="scss">
   .pop {
     border-radius: 5px;
     background-color: var(--primary);
@@ -341,4 +185,7 @@ let pop = false
     padding: 1rem;
     transition: ease-in-out;
   }
+
+// import some colors from pico _colors.scss
+
 </style>
