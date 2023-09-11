@@ -64,7 +64,7 @@ onMount(() => {
 
 async function makePostRequest(data) {
   try {
-    const response = await fetch('https://contio-backend.vercel.app/api/submit/new', {
+    const response = await fetch('https://contio-backend.vercel.app/meeting/submit/new', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

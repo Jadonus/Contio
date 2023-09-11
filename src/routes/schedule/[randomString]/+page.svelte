@@ -32,7 +32,7 @@ let modal= false
 
    async function handleSubmit() {
     try {
-      const response = await fetch('http://contio-backend.vercel.app/api/submit/', {
+      const response = await fetch('http://contio-backend.vercel.app/meeting/submit/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
