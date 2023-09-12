@@ -86,7 +86,7 @@ let email = ''
 function generateLink() {
   const randomString = generateRandomString(3);
   const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
-  const link = `http://contio.vercel.app/schedule/${randomString}?${dateParams}`;
+  const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
   generatedLink = link; // Store the link for display
   generatedLinkText = generatedLink;
 
