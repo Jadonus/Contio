@@ -110,7 +110,17 @@ function generateLink() {
   }
 
   let pop = false;
-
+function share() {
+if (navigator.share) {
+  navigator.share({
+    title: 'Scheduling Link',
+    text: 'Click the dates you are availible on this link.',
+    url: generatedLinkText,
+  })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+}
+else{
   const copyContent = async () => {
     try {
       await navigator.clipboard.writeText(generatedLinkText);
@@ -120,6 +130,9 @@ function generateLink() {
       console.error('Failed to copy: ', err);
     }
   }
+  copyContent()
+}
+}
 </script>
 
 <Nav />
@@ -167,7 +180,7 @@ function generateLink() {
             target="_blank"
             rel="noopener noreferrer"
             id="myInput"
-            on:click|preventDefault={copyContent}
+            on:click|preventDefault={share}
           >
             {`${generatedLink}`}
           </a>
