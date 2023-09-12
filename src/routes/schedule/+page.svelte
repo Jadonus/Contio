@@ -1,12 +1,11 @@
 <script>
-
   import Nav from "../Nav.svelte";
   import { onMount } from "svelte";
 
   // Array to store the submitted dates
   let submittedDates = [];
   let generatedLink = "";
-let submootedDates = [];
+  let submootedDates = [];
   // Function to handle date submission
   function submitDate(event) {
     const selectedDateTime = event.target.value;
@@ -23,34 +22,82 @@ let submootedDates = [];
     }
   }
 
- function formatDateTime(dateTimeString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  function formatDateTime(dateTimeString) {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
     const dateTime = new Date(dateTimeString);
-    return dateTime.toLocaleString('en-US', options);
+    return dateTime.toLocaleString("en-US", options);
   }
-  let formattedDates = submittedDates.map(date => formatDateTime(date));
+  let formattedDates = submittedDates.map((date) => formatDateTime(date));
 
-
-
-
-let dateInput;
-onMount(() => {
-  dateInput = document.querySelector('input[type="datetime-local"]');
-  dateInput.min = new Date().toISOString().slice(0, 16);
-  dateInput.addEventListener("blur", submitDate);
-
-
-
-});
-
-
-
+  let dateInput;
+  onMount(() => {
+    dateInput = document.querySelector('input[type="datetime-local"]');
+    dateInput.min = new Date().toISOString().slice(0, 16);
+    dateInput.addEventListener("blur", submitDate);
+  });
 
   // Function to generate a random string
-  const randomWords =["advertise", "arise", "afford", "assumption", "album", "ample", "agile", "attract", "approach", "aquarium", "adviser", "aviation", "automatic", "appear", "applied", "abuse", "adult", "amuse", "architect", "archive", "artist", "articulate", "arrange", "arm", "addition", "arrangement", "astonishing", "absolute", "arrogant", "at", "apparatus", "activate", "aware", "accident", "admission", "asset", "appendix", "appointment", "abundant", "avenue", "annual", "apathy", "adopt", "analysis", "amputate", "attitude", "advantage", "aluminium", "acceptance", "accompany"]
+  const randomWords = [
+    "advertise",
+    "arise",
+    "afford",
+    "assumption",
+    "album",
+    "ample",
+    "agile",
+    "attract",
+    "approach",
+    "aquarium",
+    "adviser",
+    "aviation",
+    "automatic",
+    "appear",
+    "applied",
+    "abuse",
+    "adult",
+    "amuse",
+    "architect",
+    "archive",
+    "artist",
+    "articulate",
+    "arrange",
+    "arm",
+    "addition",
+    "arrangement",
+    "astonishing",
+    "absolute",
+    "arrogant",
+    "at",
+    "apparatus",
+    "activate",
+    "aware",
+    "accident",
+    "admission",
+    "asset",
+    "appendix",
+    "appointment",
+    "abundant",
+    "avenue",
+    "annual",
+    "apathy",
+    "adopt",
+    "analysis",
+    "amputate",
+    "attitude",
+    "advantage",
+    "aluminium",
+    "acceptance",
+    "accompany",
+  ];
 
   // Function to generate random string from random words
- function generateRandomString(length) {
+  function generateRandomString(length) {
     let result = "";
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * randomWords.length);
@@ -62,44 +109,47 @@ onMount(() => {
   // Function to generate the link
   let generatedLinkText = "";
 
-async function makePostRequest(data) {
-  try {
-    const response = await fetch('https://contio-backend.vercel.app/meeting/submit/new', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+  async function makePostRequest(data) {
+    try {
+      const response = await fetch(
+        "https://contio-backend.vercel.app/meeting/submit/new",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
-    if (response.ok) {
-      console.log('POST request successful!');
-    } else {
-      console.error('POST request failed!');
+      if (response.ok) {
+        console.log("POST request successful!");
+      } else {
+        console.error("POST request failed!");
+      }
+    } catch (error) {
+      console.error("Error while making POST request:", error);
     }
-  } catch (error) {
-    console.error('Error while making POST request:', error);
   }
-}
-let email = '' 
-// Inside your generateLink function, after generating the link:
-function generateLink() {
-  const randomString = generateRandomString(3);
-  const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
-  const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
-  generatedLink = link; // Store the link for display
-  generatedLinkText = generatedLink;
+  let email = "";
+  // Inside your generateLink function, after generating the link:
+  function generateLink() {
+    const randomString = generateRandomString(3);
+    const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
+    const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
+    generatedLink = link; // Store the link for display
+    generatedLinkText = generatedLink;
 
-  // Now, let's create the data to send to your backend
-  const postData = {
-    timeOfRequest: new Date().toISOString(), // Get the current time as ISO string
-    generatedLink: generatedLink,
-    email: email
-  };
+    // Now, let's create the data to send to your backend
+    const postData = {
+      timeOfRequest: new Date().toISOString(), // Get the current time as ISO string
+      generatedLink: generatedLink,
+      email: email,
+    };
 
-  // Make the POST request
-  makePostRequest(postData);
-}
+    // Make the POST request
+    makePostRequest(postData);
+  }
 
   // Function to close the modal
   function closeModal() {
@@ -110,29 +160,29 @@ function generateLink() {
   }
 
   let pop = false;
-function share() {
-if (navigator.share) {
-  navigator.share({
-    title: 'Scheduling Link',
-    text: 'Click the dates you are availible on this link.',
-    url: generatedLinkText,
-  })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
-}
-else{
-  const copyContent = async () => {
-    try {
-      await navigator.clipboard.writeText(generatedLinkText);
-      console.log('Content copied to clipboard');
-      pop = true;
-    } catch (err) {
-      console.error('Failed to copy: ', err);
+  function share() {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Scheduling Link",
+          text: "Click the dates you are availible on this link.",
+          url: generatedLinkText,
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Error sharing", error));
+    } else {
+      const copyContent = async () => {
+        try {
+          await navigator.clipboard.writeText(generatedLinkText);
+          console.log("Content copied to clipboard");
+          pop = true;
+        } catch (err) {
+          console.error("Failed to copy: ", err);
+        }
+      };
+      copyContent();
     }
   }
-  copyContent()
-}
-}
 </script>
 
 <Nav />
@@ -142,10 +192,17 @@ else{
     <h2>Pick a couple times when you are available to meet.</h2>
   </hgroup>
   <div class="grid">
-  <div><input type="datetime-local" min="{new Date().toISOString().slice(0, 16) }" /></div>
+    <div>
+      <input
+        type="datetime-local"
+        min={new Date().toISOString().slice(0, 16)}
+      />
+    </div>
 
-  <div><input type="email" bind:value={email} placeholder="Your Email." /></div>
-</div>
+    <div>
+      <input type="email" bind:value={email} placeholder="Your Email." />
+    </div>
+  </div>
 </header>
 
 <div class="container">
@@ -154,10 +211,12 @@ else{
       <li>{date}</li>
     {/each}
   </ul>
-
-<button role="button" on:click={generateLink} disabled={!submittedDates.length}>Generate link from dates</button>
-
-
+<div class="grid">
+  <button
+    on:click={generateLink}
+    disabled={!submittedDates.length}>Generate link from dates</button
+  >
+</div>
   {#if generatedLink}
     <dialog open>
       <article>
@@ -172,7 +231,7 @@ else{
           <h2>Beep boop beep! 🤖 Your link is ready!</h2>
         </header>
         {#if pop}
-        <p class="pop">Link copied to clipboard!</p>
+          <p class="pop">Link copied to clipboard!</p>
         {/if}
         <h4>
           <a
@@ -198,7 +257,9 @@ else{
     padding: 1rem;
     transition: ease-in-out;
   }
-
-// import some colors from pico _colors.scss
-
+  .center {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
 </style>
