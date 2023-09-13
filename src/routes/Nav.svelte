@@ -6,6 +6,10 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.min.css"
 />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
 <html lang="html">
   <div class="hero">
     <nav class="">
@@ -25,7 +29,7 @@
           >
         </li>
       </ul>
-      <ul >
+      <ul>
         <li><a class="white" href="#">Link</a></li>
         <li><a class="mr white" href="#">Link</a></li>
       </ul>
@@ -43,6 +47,7 @@
     html {
       max-width: 100%;
       overflow-x: hidden;
+      font-family:  sans-serif;
     }
     ::-webkit-scrollbar {
       display: none;
@@ -93,7 +98,7 @@
       --pico-primary-inverse: #fff;
     }
     .white {
-      color: #f0f1f3;
+      color: var(--pico-background);
     }
   </style>
 </html>

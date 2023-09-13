@@ -22,8 +22,12 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@splinetool/loader": "^0.9.446",
 		"animate.css": "^4.1.1",
+		"aos": "^2.3.4",
 		"crypto-js": "^4.1.1",
-		"svelte-kit": "^1.2.0"
+		"spline": "^0.0.0",
+		"svelte-kit": "^1.2.0",
+		"three": "^0.156.1"
 	}
 }
