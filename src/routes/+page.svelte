@@ -5,6 +5,8 @@
   import Nav from "./Nav.svelte";
   import Chatbubble from "$lib/chatbubble.svelte";
   import Introduction from "$lib/introduction.svelte";
+  import Introfollow from "$lib/introfollow.svelte";
+  import End from "$lib/end.svelte";
   let hello = "";
 </script>
 
@@ -29,8 +31,10 @@
   </header>
 
     <Introduction />
-</main>
 
+    <Introfollow />
+<End />
+</main>
 <style>
  
   h1 {
