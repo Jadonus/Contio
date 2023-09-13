@@ -25,12 +25,21 @@
         elementTop <= viewportCenter && elementBottom >= viewportCenter;
 
       // Calculate the zoom scale based on the element's position
-      if (isCentered) {
-        zoomScale = 1 + (viewportCenter - elementTop) * 0.08; // Adjust this factor as needed
-        backgroundColorOpacity = (elementTop - viewportCenter) / viewportCenter;
-        // Adjust the opacity range as needed
-    };
-    } 
+       if (isCentered) {
+    zoomScale = 1 + (viewportCenter - elementTop) * 0.08;
+    // Adjust this factor as needed
+
+    // But let's make it disappear when it's out of view
+    if (elementTop < 0 || elementBottom > viewportHeight) {
+      backgroundColorOpacity = 0; // Make it disappear
+    } else {
+      backgroundColorOpacity = (elementTop - viewportCenter) / viewportCenter;
+      // Adjust the opacity range as needed
+    }
+  } else {
+    backgroundColorOpacity = 0; // Not centered, so no need to show it
+  }
+};
     window.addEventListener("scroll", handleScroll);
   });
 </script>
