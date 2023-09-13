@@ -59,21 +59,21 @@ let modal= false
     <h2>A message will be sent to the person who created this with your answer. Please only pick one date.</h2>
   </hgroup>
   
-  <ul>
   <input placeholder="Name" type="text" bind:value={name}>
 <div class="grid">
   {#each hi as date}
-    <div>
       <button class={selectedDate === date ? '' : 'secondary'} on:click={() => selectedDate = date}>{date}</button>
-    </div>
   {/each}
+
 </div>
 {#if name}
+<div class="grid tpm">
 <button class={show ? 'success' : ''} on:click={handleSubmit}>
   {show ? '✔ Success' : 'Submit'}
 </button>
+</div>
 {/if}
-  </ul>
+
 {#if modal}
 <dialog open>
   <header><h1>Sorry, This link is not valid, Please try another link.</h1></header>
@@ -88,6 +88,9 @@ let modal= false
   background-color: #e8f5e9;
   color: darkgreen;
   border-width: 0px
+}
+.tpm {
+ margin-top: 1rem; 
 }
 /* Your styling here */
 </style>

@@ -36,6 +36,11 @@
     </nav>
   </div>
   <style>
+    html {
+    overflow-x: hidden;
+
+    -webkit::overflow-x: hidden;
+    }
     .white {
       margin-left: 5px;
     }

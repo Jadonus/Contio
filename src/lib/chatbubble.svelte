@@ -2,6 +2,15 @@
   import { onMount } from "svelte";
   onMount(() => {
     AOS.init();
+    function parallax() {
+      var s = document.getElementById("floater");
+      var yPos = 0 - window.pageYOffset / 9;
+      s.style.top = 200 + yPos + "%";
+    }
+
+    window.addEventListener("scroll", function () {
+      parallax();
+    });
   });
 </script>
 
@@ -22,7 +31,17 @@
       </p>
     </div>
   </div>
-
+  <svg
+    style="height: 50vh; width: 50vw;float: right"
+    viewBox="0 0 200 200"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill="#D24318"
+      d="M42.1,-56.3C51.7,-42,54.9,-26.1,54.3,-12.2C53.6,1.7,49,13.7,43.4,26.8C37.9,39.9,31.4,54.2,20.4,59.8C9.4,65.5,-6.1,62.5,-22.3,58C-38.5,53.5,-55.3,47.6,-65.1,35.3C-74.9,23,-77.7,4.4,-75.9,-14.7C-74.1,-33.8,-67.7,-53.5,-54.3,-67.1C-40.9,-80.8,-20.4,-88.4,-2.1,-85.9C16.2,-83.3,32.4,-70.6,42.1,-56.3Z"
+      transform="translate(100 100)"
+    />
+  </svg>
   <div class="padb" />
   <div
     data-aos="fade-left"
@@ -36,10 +55,19 @@
       </p>
     </div>
   </div>
+  <svg
+    viewBox="0 0 200 200"
+    xmlns="http://www.w3.org/2000/svg"
+    style="height: 50vh; width: 50vw;float: left"
 
+  >
+    <path
+      fill="#D24318"
+      d="M32.9,-36.7C43.9,-29.9,55,-20.8,63.7,-6.1C72.4,8.6,78.7,28.8,71.8,42.1C64.9,55.4,44.9,61.7,26.7,64.5C8.5,67.4,-7.7,66.7,-19.5,59.7C-31.2,52.7,-38.4,39.5,-49.3,25.9C-60.1,12.3,-74.7,-1.7,-73.7,-14C-72.7,-26.3,-56.2,-36.8,-41.3,-42.9C-26.5,-49,-13.2,-50.7,-1.2,-49.3C10.9,-47.9,21.8,-43.5,32.9,-36.7Z"
+      transform="translate(100 100)"
+    />
+  </svg>
   <div class="padb" />
-
- 
 </main>
 
 <style>
@@ -47,6 +75,7 @@
 
   /* container */
   /* CSS talk bubble */
+
   .talk-bubble {
     margin: 40px;
     display: inline-block;
