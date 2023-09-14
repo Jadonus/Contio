@@ -1,25 +1,44 @@
 <script>
   import Nav from "../Nav.svelte";
   import { onMount } from "svelte";
+  import { writable, derived } from "svelte/store";
+  import { Trash } from "phosphor-svelte";
 
   // Array to store the submitted dates
-  let submittedDates = [];
+  let submittedDates = writable([]);
+  let formattedDates = derived(submittedDates, ($submittedDates) => {
+    return $submittedDates.map((date) => formatDateTime(date));
+  });
+
   let generatedLink = "";
-  let submootedDates = [];
   // Function to handle date submission
   function submitDate(event) {
     const selectedDateTime = event.target.value;
 
     // Check if the input is not empty and not the default empty value
     if (selectedDateTime && selectedDateTime !== "1970-01-01T00:00") {
-      submittedDates = [...submittedDates, selectedDateTime];
+      submittedDates.update((dates) => {
+        return [...dates, selectedDateTime]; // Update the submittedDates store
+      });
 
       // Format the newly submitted date and add it to the formattedDates array
       const formattedDate = formatDateTime(selectedDateTime);
-      formattedDates = [...formattedDates, formattedDate];
+      formattedDates.update((dates) => {
+        return [...dates, formattedDate]; // Update the formattedDates store
+      });
 
       event.target.value = ""; // Clear the input after adding
     }
+  }
+
+  function removeDate(date) {
+    submittedDates.update((dates) => {
+      const index = dates.indexOf(date);
+      if (index !== -1) {
+        dates.splice(index, 1);
+      }
+      return [...dates]; // Return a new array to trigger reactivity
+    });
   }
 
   function formatDateTime(dateTimeString) {
@@ -33,7 +52,6 @@
     const dateTime = new Date(dateTimeString);
     return dateTime.toLocaleString("en-US", options);
   }
-  let formattedDates = submittedDates.map((date) => formatDateTime(date));
 
   let dateInput;
   onMount(() => {
@@ -135,14 +153,14 @@
   // Inside your generateLink function, after generating the link:
   function generateLink() {
     const randomString = generateRandomString(3);
-    const dateParams = submittedDates.map((date) => `date=${date}`).join("&");
+    const dateParams = $submittedDates.map((date) => `date=${date}`).join("&"); // Use $submittedDates to access the store
     const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
     generatedLink = link; // Store the link for display
     generatedLinkText = generatedLink;
 
     // Now, let's create the data to send to your backend
     const postData = {
-      timeOfRequest: new Date().toISOString(), // Get the current time as ISO string
+      timeOfRequest: new Date().toISOString(),
       generatedLink: generatedLink,
       email: email,
     };
@@ -207,16 +225,25 @@
 
 <div class="container">
   <ul>
-    {#each formattedDates as date}
-      <li>{date}</li>
+    {#each $submittedDates as date (date)}
+      <!-- Use submittedDates instead of formattedDates -->
+      <li>
+        {formatDateTime(date)}
+        <!-- Format the date here directly -->
+        <button class="trash" on:click={() => removeDate(date)}
+          ><Trash size="1.3rem" /></button
+        >
+      </li>
     {/each}
   </ul>
-<div class="grid">
-  <button
-    on:click={generateLink}
-    disabled={!submittedDates.length}>Generate link from dates</button
-  >
-</div>
+
+  <div class="grid">
+    <button
+      on:click={generateLink}
+      disabled={(!submittedDates.length, !email.length)}
+      >Generate link from dates</button
+    >
+  </div>
   {#if generatedLink}
     <dialog open>
       <article>
@@ -250,6 +277,13 @@
 </div>
 
 <style lang="scss">
+  .trash {
+    padding: 0.2rem;
+    border-radius: 50%;
+    background-color: var(--pico-color-red-500);
+
+    font-smooth: auto;
+  }
   .pop {
     border-radius: 5px;
     background-color: var(--primary);

@@ -7,36 +7,41 @@
   import Introduction from "$lib/introduction.svelte";
   import Introfollow from "$lib/introfollow.svelte";
   import End from "$lib/end.svelte";
+  import Link from "$lib/link.svelte";
   let hello = "";
 </script>
 
 <main>
-  <Nav />
-  <header class="container mt">
-    <hgroup class="grid">
-      <div>
-        <h1 class="animate__animated animate__bounceInLeft">Contio</h1>
-        <h2 class="larger">Let's Meet up.</h2>
-        <a href="/schedule" class="link-arrow" role="button">
-          Start Scheduling <p><ChevronsRightIcon /></p>
-        </a>
-      </div>
-      <div class="image-container">
-        <img class="" alt="meeting" src="meeting2.svg" />
-      </div>
-    </hgroup>
-    <div class="vh" />
+  <div class="h">
+    <Nav />
 
-    <Chatbubble />
-  </header>
+    <header class="container mt">
+      <hgroup class="grid">
+        <div>
+          <h1 class="animate__animated animate__bounceInLeft">Contio</h1>
+          <h2 class="larger">Let's Meet up.</h2>
+        </div>
+        <div class="image-container">
+          <img class="" alt="meeting" src="meeting2.svg" />
+        </div>
+      </hgroup>
+
+      <div class="vh" />
+
+      <Chatbubble />
+    </header>
 
     <Introduction />
 
     <Introfollow />
-<End />
+    <End />
+  </div>
 </main>
+
 <style>
- 
+  .h {
+    overflow-x: hidden;
+  }
   h1 {
     font-size: 6.5em;
 
@@ -74,7 +79,7 @@
       margin-right: 50px;
     }
   }
-  
+
   .mt {
     margin-top: 4em;
   }
