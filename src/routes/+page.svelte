@@ -8,6 +8,7 @@
   import Introfollow from "$lib/introfollow.svelte";
   import End from "$lib/end.svelte";
   import Link from "$lib/link.svelte";
+  import Footer from "$lib/footer.svelte";
   let hello = "";
 </script>
 
@@ -36,11 +37,14 @@
     <Introfollow />
     <End />
   </div>
+
+    <Footer />
 </main>
 
 <style>
   .h {
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
   h1 {
     font-size: 6.5em;

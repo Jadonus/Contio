@@ -45,7 +45,7 @@
   <style>
     html {
     overflow-x: hidden;
-
+    underline-color: purple;
     -webkit::overflow-x: hidden;
     }
     .white {
@@ -111,6 +111,8 @@
     }
     .white {
       color: var(--pico-background);
+
+    text-decoration-color: var(--pico-color-violet-500);
     }
   </style>
 </html>
