@@ -236,11 +236,10 @@
       </li>
     {/each}
   </ul>
-
   <div class="grid">
     <button
       on:click={generateLink}
-      disabled={(!submittedDates.length, !email.length)}
+      disabled={(!submittedDates.length || !email.length)}
       >Generate link from dates</button
     >
   </div>

@@ -1,38 +1,9 @@
-# create-svelte
+# Contio: Meeting scheduling
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## This is the frontend of this app. For backend, visit [contio_backend](https://github.com/jadonus/contio_backend)
 
-## Creating a project
+This is a pretty simple app: the meeting head creates the time, and sends an app generated link to the people in the meeting. They then can press on the times they are availible, and an email will be sent back to the original creator with responses. Made with Sveltekit.
 
-If you're seeing this, you've probably already done this step. Congrats!
+>In Case you are Wondering, Contio means 'meeting' or 'assembly' in Latin.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+— A Project By Jadon Gearhart (Jadonus)
