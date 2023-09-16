@@ -1,5 +1,5 @@
 <main class="bg">
-  <div class="container">
+  <div class="container " data-aos="fade-left">
     <h1>How Contio Solves the issue of scheduling</h1>
     <h4>
       Contio fixes problems with scheduling by making it as easy as possible for

@@ -10,12 +10,9 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.colors.min.css"
 />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-  rel="stylesheet"
-/>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
 
 <html lang="html">
   <div class="hero">
@@ -59,7 +56,7 @@
     html {
       max-width: 100%;
       overflow-x: hidden;
-      font-family:  sans-serif;
+      font-family:  'Inter', sans-serif;
     }
     ::-webkit-scrollbar {
       display: none;

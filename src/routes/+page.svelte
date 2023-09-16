@@ -21,12 +21,12 @@
         <div>
           <h1 class="animate__animated animate__bounceInLeft">Contio</h1>
           <h2 class="larger">Let's Meet up.</h2>
+          <Link />
         </div>
         <div class="image-container">
           <img class="" alt="meeting" src="meeting2.svg" />
         </div>
       </hgroup>
-
       <div class="vh" />
 
       <Chatbubble />
@@ -49,12 +49,15 @@
   h1 {
     font-size: 6.5em;
 
-    font-family: sans-serif;
+
+font-weight: bolder;
+font-family:  'Inter', sans-serif;
+
   }
   .larger {
     font-size: 2em;
 
-    font-family: sans-serif;
+font-family:  'Inter', sans-serif;
   }
   a {
     text-decoration: none;

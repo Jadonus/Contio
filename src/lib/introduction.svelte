@@ -7,7 +7,7 @@
   // camera
 </script>
 
-<main class="">
+<main data-aos="" class="">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <div class="custom-shape-divider-bottom-1694722152">
@@ -37,10 +37,10 @@
   <div class="bg">
     <div class="canvas-container" />
     <div class="flex">
-      <h1 class="textcen">
+      <h1 data-aos="zoom-in-up"class="textcen">
         Introducing Contio, The easy-to-use scheduling app for groups of all
         sizes.<br />
-        <a role="button" class="tpm pbp" href="/schedule"
+        <a role="button" data-aos="zoom-in-up" class="tpm pbp" href="/schedule"
           >Schedule Your Own Meeting</a
         >
       </h1>
