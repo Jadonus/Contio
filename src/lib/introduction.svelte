@@ -37,7 +37,7 @@
   <div class="bg">
     <div class="canvas-container" />
     <div class="flex">
-      <h1 data-aos="zoom-in-up"class="textcen">
+      <h1 data-aos="zoom-in-up" class="textcen">
         Introducing Contio, The easy-to-use scheduling app for groups of all
         sizes.<br />
         <a role="button" data-aos="zoom-in-up" class="tpm pbp" href="/schedule"
@@ -55,13 +55,14 @@
     background-color: #d34318;
   }
   .pbp {
-    background-color: var(--pico-background-color);
+    background-color: var(--pico-color-violet-500);
+    border-radius: 1rem;
+    transition: ease-in-out, 0.7s;
   }
-  /* Style the canvas container to fill the screen */
-
-  /* Style the canvas element (Three.js graphic) */
-
-  /* Style the text container */
+  .pbp:hover {
+    scale: 1.1;
+    transition: ease-in-out, 0.7s;
+  }
   .flex {
     display: flex;
     align-items: center;

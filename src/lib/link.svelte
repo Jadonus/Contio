@@ -1,9 +1,10 @@
 <script>
-
   import { ArrowRight } from "phosphor-svelte";
-
 </script>
-<a class="hover" href="/schedule" role="button">Start Scheduling <ArrowRight /></a>
+
+<a class="hover" data-aos="zoom-in-right" href="/schedule" role="button"
+  >Start Scheduling <ArrowRight /></a
+>
 
 <style>
   .hover:hover {
@@ -12,7 +13,7 @@
     scale: 1.1;
     transition: ease-in-out, 0.5s;
   }
-  .hover{
+  .hover {
     transition: ease-in-out, 0.5s;
   }
 </style>

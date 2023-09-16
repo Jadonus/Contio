@@ -7,8 +7,8 @@
   // Array to store the submitted dates
   let submittedDates = writable([]);
   let formattedDates = derived(submittedDates, ($submittedDates) => {
-    return $submittedDates.map((date) => formatDateTime(date));
-  });
+  return $submittedDates.map((date) => formatDateTime(date));
+});
 
   let generatedLink = "";
   // Function to handle date submission
@@ -239,7 +239,7 @@
   <div class="grid">
     <button
       on:click={generateLink}
-      disabled={(!submittedDates.length || !email.length)}
+      disabled={(!$submittedDates.length || !email.length)}
       >Generate link from dates</button
     >
   </div>
@@ -278,8 +278,9 @@
 <style lang="scss">
   .trash {
     padding: 0.2rem;
+    border-color:var(--pico-color-violet-500);
     border-radius: 50%;
-    background-color: var(--pico-color-red-500);
+    background-color: var(--pico-color-violet-500);
 
     font-smooth: auto;
   }
@@ -295,4 +296,9 @@
     justify-items: center;
     align-items: center;
   }
+main {
+  font-family: 'Inter', sans-serif;
+
+      --pico-font-family: 'Inter', sans-serif;
+}
 </style>

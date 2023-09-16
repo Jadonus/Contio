@@ -57,6 +57,7 @@
       max-width: 100%;
       overflow-x: hidden;
       font-family:  'Inter', sans-serif;
+      --pico-font-family: 'Inter', sans-serif;
     }
     ::-webkit-scrollbar {
       display: none;

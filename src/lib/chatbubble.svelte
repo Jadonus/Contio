@@ -37,7 +37,7 @@
   <svg
     id="floater"
     class="float-center"
-    style="height: 25vh; width: 25vw;float: left"
+    style="height: 15vh; width: 15vw;float: left"
     viewBox="0 0 200 200"
     xmlns="http://www.w3.org/2000/svg"
   >

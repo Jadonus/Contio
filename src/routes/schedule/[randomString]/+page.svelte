@@ -92,5 +92,8 @@ let modal= false
 .tpm {
  margin-top: 1rem; 
 }
+main {
+  font-family: 'Inter', sans-serif;
+}
 /* Your styling here */
 </style>

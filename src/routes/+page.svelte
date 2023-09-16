@@ -19,8 +19,10 @@
     <header class="container mt">
       <hgroup class="grid">
         <div>
-          <h1 class="animate__animated animate__bounceInLeft">Contio</h1>
-          <h2 class="larger">Let's Meet up.</h2>
+          <h1 class="" data-aos="zoom-in-right">Contio</h1>
+          <h2 class="larger" data-aos="zoom-in-right">
+            Let's Meet up.
+          </h2>
           <Link />
         </div>
         <div class="image-container">
@@ -38,7 +40,7 @@
     <End />
   </div>
 
-    <Footer />
+  <Footer />
 </main>
 
 <style>
@@ -47,17 +49,15 @@
     -webkit-overflow-scrolling: touch;
   }
   h1 {
-    font-size: 6.5em;
+    font-size: 6em;
 
-
-font-weight: bolder;
-font-family:  'Inter', sans-serif;
-
+    font-weight: bolder;
+    font-family: "Inter", sans-serif;
   }
   .larger {
     font-size: 2em;
 
-font-family:  'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
   a {
     text-decoration: none;

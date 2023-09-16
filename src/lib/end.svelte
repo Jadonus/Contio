@@ -18,6 +18,11 @@
       <summary>Will this send me spam?</summary>
       <p>Absoloutly not! We do not send spam to anyone.</p>
     </details>
+ <hr />
+    <details>
+      <summary>Why is it called Contio?</summary>
+      <p>Contio Means 'Assembly', or 'Meeting' in Latin.</p>
+    </details>
   </div>
 </main>
 
