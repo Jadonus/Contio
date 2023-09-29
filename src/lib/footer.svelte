@@ -25,21 +25,25 @@
 </div>
 
 <style>
+
   .bg {
     margin-top: 10em;
     width: 100vw;
     bottom: 0;
-
     background-color: #5b2d9c;
   }
   .f {
     text-align: center;
     padding-top: 1rem;
+    color: white;
   }
   .jadon {
     margin: 2rem;
+
+    color: white;
   }
   .source {
     margin: 2rem;
+    color: white;
   }
 </style>

@@ -1,7 +1,7 @@
 <main class="bg">
   <div class="container" data-aos="fade-left">
-    <h1>How Contio Solves the issue of scheduling</h1>
-    <h4>
+    <h1 class="fg">How Contio Solves the issue of scheduling</h1>
+    <h4 class="fg">
       Contio fixes problems with scheduling by making it as easy as possible for
       both the meeting leader and the people in the meeting. Contio Is
       completely free, with no sign ups at all, meaning with a click of a button
@@ -22,5 +22,8 @@
     padding-bottom: 10px;
     padding-top: 3em;
     font-smooth: antialiased;
+  }
+  .fg {
+    color: white;
   }
 </style>

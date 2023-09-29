@@ -153,8 +153,10 @@
   // Inside your generateLink function, after generating the link:
   function generateLink() {
     const randomString = generateRandomString(3);
-    const dateParams = $submittedDates.map((date) => `date=${date}`).join("&"); // Use $submittedDates to access the store
-    const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}`;
+    const dateParams = $submittedDates.map((date) => `date=${date}`).join("&");
+let now = new Date().toISOString()
+    const time = "time=" + now 
+    const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&${time}`;
     generatedLink = link; // Store the link for display
     generatedLinkText = generatedLink;
 

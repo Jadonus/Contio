@@ -34,8 +34,7 @@
         </li>
       </ul>
       <ul>
-        <li><a class="white" href="#">Link</a></li>
-        <li><a class="mr white" href="#">Link</a></li>
+        <li><a class="mr white" href="/schedule">Schedule A Meeting</a></li>
       </ul>
     </nav>
   </div>

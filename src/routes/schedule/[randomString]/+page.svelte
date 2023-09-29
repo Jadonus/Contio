@@ -15,6 +15,8 @@
     return dateTime.toLocaleString('en-US', options);
   }
 const dates = queryParams.getAll('date');
+
+const time = queryParams.getAll('time');
   const hi = dates.map(date => formatDateTime(date));
 let modal= false
   function showAlertIfNoDates() {
@@ -22,6 +24,8 @@ let modal= false
       modal = true
     }
   }
+let edittime = JSON.stringify(time)
+console.log("time" + edittime)
  onMount(() => {
     showAlertIfNoDates();
   });
@@ -49,6 +53,45 @@ let modal= false
       console.error('An error occurred:', error);
     }
   }
+const timeArray = JSON.parse(edittime);
+function formatTimeLeft(milliseconds) {
+  const seconds = Math.floor(milliseconds / 1000);
+  const days = Math.floor(seconds / 86400); // Number of seconds in a day
+  const hours = Math.floor((seconds % 86400) / 3600); // Number of seconds in an hour
+  const minutes = Math.floor(((seconds % 86400) % 3600) / 60); // Number of seconds in a minute
+  
+  return `${days} day(s), ${hours} hour(s), and ${minutes} minute(s)`
+}
+// Access the first item in the 'timeArray' to get the date-time string
+const exampleTime = new Date(timeArray[0]);
+
+exampleTime.setDate(exampleTime.getDate() + 2);
+console.log(exampleTime)
+// Calculate the time difference in milliseconds
+const timeDifference = exampleTime - new Date() ; 
+console.log(timeDifference)
+// Initialize timeLeft with the time difference
+let timeLeft = timeDifference > 0 ? timeDifference : 0;
+let countdown
+// Create a Svelte reactive variable for time display
+let timeLeftDisplay
+function startCountdown() {
+  countdown = setInterval(() => {
+    timeLeft -= 1000; // Subtract 1 second
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      modal = true; // Time's up, show the modal!
+
+    console.log(exampleTime)
+    } else {
+      timeLeftDisplay = formatTimeLeft(timeLeft); // Update the time left display reactively
+    console.log(timeLeftDisplay)
+      }
+
+  }, 1000); // Update every second
+}
+  startCountdown()
+// Update the timeLeft and start the countdown
 </script>
 
 <Nav />
@@ -56,7 +99,7 @@ let modal= false
 <main class="container">
   <hgroup>
     <h1>Enter your name and press on the dates that you are available.</h1>
-    <h2>A message will be sent to the person who created this with your answer. Please only pick one date.</h2>
+    <h2>A message will be sent to the person who created this with your answer. Please only pick one date. You have {timeLeftDisplay} left to answer before your response is discarded.</h2>
   </hgroup>
   
   <input placeholder="Name" type="text" bind:value={name}>
