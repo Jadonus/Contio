@@ -156,12 +156,15 @@
   function generateLink() {
     const randomString = generateRandomString(3);
     const dateParams = $submittedDates.map((date) => `date=${date}`).join("&");
-    let now = new Date().toISOString();
-    const time = "time=" + now;
+    let now = new Date(); // Get the current date and time
+    now.setDate(now.getDate() + range); // Add 2 days to it
+
+const time = now.toISOString(); // 
     const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&${time}`;
     generatedLink = link; // Store the link for display
     generatedLinkText = generatedLink;
 
+    last = false 
     // Now, let's create the data to send to your backend
     const postData = {
       timeOfRequest: new Date().toISOString(),

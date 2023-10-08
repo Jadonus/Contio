@@ -65,7 +65,7 @@ function formatTimeLeft(milliseconds) {
 // Access the first item in the 'timeArray' to get the date-time string
 const exampleTime = new Date(timeArray[0]);
 
-exampleTime.setDate(exampleTime.getDate() + 2);
+exampleTime.setDate(exampleTime.getDate());
 console.log(exampleTime)
 // Calculate the time difference in milliseconds
 const timeDifference = exampleTime - new Date() ; 
