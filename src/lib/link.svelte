@@ -2,7 +2,7 @@
   import { ArrowRight } from "phosphor-svelte";
 </script>
 
-<a class="hover" data-aos="zoom-in-right" href="/schedule" role="button"
+<a class="hover" href="/schedule" role="button"
   >Start Scheduling <ArrowRight /></a
 >
 

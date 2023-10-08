@@ -3,12 +3,13 @@
   import { onMount } from "svelte";
   import { writable, derived } from "svelte/store";
   import { Trash } from "phosphor-svelte";
+  import autoAnimate from '@formkit/auto-animate';
 
   // Array to store the submitted dates
   let submittedDates = writable([]);
   let formattedDates = derived(submittedDates, ($submittedDates) => {
-  return $submittedDates.map((date) => formatDateTime(date));
-});
+    return $submittedDates.map((date) => formatDateTime(date));
+  });
 
   let generatedLink = "";
   // Function to handle date submission
@@ -127,6 +128,7 @@
   // Function to generate the link
   let generatedLinkText = "";
 
+  let range=2
   async function makePostRequest(data) {
     try {
       const response = await fetch(
@@ -154,8 +156,8 @@
   function generateLink() {
     const randomString = generateRandomString(3);
     const dateParams = $submittedDates.map((date) => `date=${date}`).join("&");
-let now = new Date().toISOString()
-    const time = "time=" + now 
+    let now = new Date().toISOString();
+    const time = "time=" + now;
     const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&${time}`;
     generatedLink = link; // Store the link for display
     generatedLinkText = generatedLink;
@@ -165,6 +167,7 @@ let now = new Date().toISOString()
       timeOfRequest: new Date().toISOString(),
       generatedLink: generatedLink,
       email: email,
+      sentime: range,
     };
 
     // Make the POST request
@@ -184,8 +187,6 @@ let now = new Date().toISOString()
     if (navigator.share) {
       navigator
         .share({
-          title: "Scheduling Link",
-          text: "Click the dates you are availible on this link.",
           url: generatedLinkText,
         })
         .then(() => console.log("Successful share"))
@@ -202,6 +203,10 @@ let now = new Date().toISOString()
       };
       copyContent();
     }
+  }
+  let last = false
+  function lastmod() {
+    last = true
   }
 </script>
 
@@ -226,7 +231,7 @@ let now = new Date().toISOString()
 </header>
 
 <div class="container">
-  <ul>
+  <ul use:autoAnimate>
     {#each $submittedDates as date (date)}
       <!-- Use submittedDates instead of formattedDates -->
       <li>
@@ -240,9 +245,8 @@ let now = new Date().toISOString()
   </ul>
   <div class="grid">
     <button
-      on:click={generateLink}
-      disabled={(!$submittedDates.length || !email.length)}
-      >Generate link from dates</button
+      on:click={lastmod}
+      disabled={!$submittedDates.length || !email.length}>Continue</button
     >
   </div>
   {#if generatedLink}
@@ -275,12 +279,37 @@ let now = new Date().toISOString()
       </article>
     </dialog>
   {/if}
+ {#if last}
+    <dialog open>
+      <article>
+        <header>
+          <a
+            href="#cancel"
+            data-target="modal-example"
+            on:click|preventDefault={closeModal}
+            aria-label="Close"
+            class="close"
+          />
+          <h2>Last Step!</h2>
+        </header>
+        <h4>
+        How long should you wait until the responses are sent to you?
+
+        </h4>
+        <input type="range" min="1" bind:value={range}/>
+        <p>{range} day(s)</p>
+        <div class="grid">
+        <button on:click={generateLink}>Generate My Link!</button>
+        </div>
+      </article>
+    </dialog>
+  {/if}
 </div>
 
 <style lang="scss">
   .trash {
     padding: 0.2rem;
-    border-color:var(--pico-color-violet-500);
+    border-color: var(--pico-color-violet-500);
     border-radius: 50%;
     background-color: var(--pico-color-violet-500);
 
@@ -298,9 +327,9 @@ let now = new Date().toISOString()
     justify-items: center;
     align-items: center;
   }
-main {
-  font-family: 'Inter', sans-serif;
+  main {
+    font-family: "Inter", sans-serif;
 
-      --pico-font-family: 'Inter', sans-serif;
-}
+    --pico-font-family: "Inter", sans-serif;
+  }
 </style>

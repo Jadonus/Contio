@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@formkit/auto-animate": "^0.8.0",
 		"@splinetool/loader": "^0.9.446",
 		"animate.css": "^4.1.1",
 		"aos": "^2.3.4",

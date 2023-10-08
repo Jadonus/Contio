@@ -77,6 +77,7 @@
   /* General CSS Setup */
   main {
     font-size: 1.5rem;
+    font-family:Inter, sans-serif ;
   }
 
   /* container */
