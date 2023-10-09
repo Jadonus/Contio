@@ -158,7 +158,7 @@ let admilink = ''
   function admin() {
   const encodedLink = generatedLink.replace(/&/g, '%26');
   let r = (Math.random() + 1).toString(36).substring(7);
-  let admilink = `http://localhost:5173/admin/${r}?link=${encodedLink}`;
+  let admilink = `http://contio.vercel.app/admin/${r}?link=${encodedLink}`;
   console.log(admilink);
 }
 
@@ -292,6 +292,8 @@ toggleAdmin()
             target="_blank"
             rel="noopener noreferrer"
             id="myInput"
+
+              on:click|preventDefault={share}
           >
             {`${generatedLink}`}
           </a>
@@ -304,7 +306,6 @@ toggleAdmin()
               target="_blank"
               rel="noopener noreferrer"
               id="myInput"
-              on:click|preventDefault={share}
             >
               {`${admilink}`}
             </a>
