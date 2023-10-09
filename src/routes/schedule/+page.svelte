@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { writable, derived } from "svelte/store";
   import { Trash } from "phosphor-svelte";
-  import autoAnimate from '@formkit/auto-animate';
+  import autoAnimate from "@formkit/auto-animate";
 
   // Array to store the submitted dates
   let submittedDates = writable([]);
@@ -128,7 +128,7 @@
   // Function to generate the link
   let generatedLinkText = "";
 
-  let range=2
+  let range = 2;
   async function makePostRequest(data) {
     try {
       const response = await fetch(
@@ -153,18 +153,33 @@
   }
   let email = "";
   // Inside your generateLink function, after generating the link:
+  let runad = false;
+  console.log(runad);
+  function admin() {
+    let r = (Math.random() + 1).toString(36).substring(7);
+    let admilink = `http://localhost:5173/admin/${r}?link=${generatedLink}`;
+    console.log(admilink);
+  }
+
+function toggleAdmin() {
+  if (runad) {
+    admin(); // Call the admin function
+  } else {
+    console.log("Admin function is not enabled.");
+  }
+}
   function generateLink() {
     const randomString = generateRandomString(3);
     const dateParams = $submittedDates.map((date) => `date=${date}`).join("&");
     let now = new Date(); // Get the current date and time
     now.setDate(now.getDate() + range); // Add 2 days to it
-
-const time = now.toISOString(); // 
-    const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&${time}`;
+    console.log(now)
+    const time = now.toISOString(); //
+    const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&time=${time}`;
     generatedLink = link; // Store the link for display
     generatedLinkText = generatedLink;
-
-    last = false 
+toggleAdmin()
+    last = false;
     // Now, let's create the data to send to your backend
     const postData = {
       timeOfRequest: new Date().toISOString(),
@@ -207,10 +222,12 @@ const time = now.toISOString(); //
       copyContent();
     }
   }
-  let last = false
+  let last = false;
   function lastmod() {
-    last = true
+    last = true;
   }
+
+
 </script>
 
 <Nav />
@@ -282,7 +299,7 @@ const time = now.toISOString(); //
       </article>
     </dialog>
   {/if}
- {#if last}
+  {#if last}
     <dialog open>
       <article>
         <header>
@@ -295,14 +312,19 @@ const time = now.toISOString(); //
           />
           <h2>Last Step!</h2>
         </header>
-        <h4>
-        How long should you wait until the responses are sent to you?
-
-        </h4>
-        <input type="range" min="1" bind:value={range}/>
+        <h4>How long should you wait until the responses are sent to you?</h4>
+        <input type="range" min="1" bind:value={range} />
         <p>{range} day(s)</p>
+        <h4>
+          Should The Admin Dashboard Feature Be enabled? <a href="/admin/"
+            >info</a
+          >
+        </h4>
+        <input class="mb" type="checkbox" bind:checked={runad}  /><label
+          class="mb">Enable it!</label
+        >
         <div class="grid">
-        <button on:click={generateLink}>Generate My Link!</button>
+          <button on:click={generateLink}>Generate My Link!</button>
         </div>
       </article>
     </dialog>
@@ -334,5 +356,8 @@ const time = now.toISOString(); //
     font-family: "Inter", sans-serif;
 
     --pico-font-family: "Inter", sans-serif;
+  }
+  .mb {
+    margin-bottom: 1rem;
   }
 </style>
