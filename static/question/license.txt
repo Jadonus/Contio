@@ -1,0 +1,11 @@
+Model Information:
+* title:	Question 3D icon
+* source:	https://sketchfab.com/3d-models/question-3d-icon-ba8c685715a849fab6f289a2469d1567
+* author:	summer57 (https://sketchfab.com/summer5717)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Question 3D icon" (https://sketchfab.com/3d-models/question-3d-icon-ba8c685715a849fab6f289a2469d1567) by summer57 (https://sketchfab.com/summer5717) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

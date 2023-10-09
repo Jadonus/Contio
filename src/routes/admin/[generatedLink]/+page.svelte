@@ -104,7 +104,7 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
     <h1>Admin Info</h1>
 
           {#if apistuff && Array.isArray(apistuff.data) && apistuff.data.length > 0}
-<p>{apistuff.data.length} Response</p>
+<p>{apistuff.data.length} Response(s)</p>
 
           {:else}
           <p>No Responses!</p>

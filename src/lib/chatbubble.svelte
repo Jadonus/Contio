@@ -1,19 +1,135 @@
 <script>
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
+  let model; // Define the model variable
+
   import { onMount } from "svelte";
   onMount(() => {
-    AOS.init();
-    function parallax() {
-      var s = document.getElementById("floater");
+    // Set up your scene, camera, and renderer as usual
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
 
-      var s2 = document.getElementById("floater2");
-      var yPos = 0 - window.pageYOffset / 8;
-      s.style.top = 200 + yPos + "%";
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Adjust intensity as needed
+    scene.add(ambientLight);
 
-      s2.style.top = 380 + yPos + "%";
-    }
+    // Create a container div for the renderer
+    const rendererContainer = document.createElement("div");
+    rendererContainer.style.position = "absolute"; // Position it as needed
+    rendererContainer.style.top = "215%"; // Adjust the vertical position
+    rendererContainer.style.left = "-100px"; // Adjust the horizontal position
+    rendererContainer.style.width = "1em"; // Set the desired width
 
-    window.addEventListener("scroll", function () {
-      parallax();
+    rendererContainer.setAttribute("data-aos", "fade-left");
+    rendererContainer.style.float = "right"; 
+
+    rendererContainer.style.height = "1em";
+    document.body.appendChild(rendererContainer);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true }); // Add { alpha: true }
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0); // Set clear color to transparent
+    rendererContainer.appendChild(renderer.domElement); // Append renderer to the container
+
+    // Load the GLTF model
+    const loader = new GLTFLoader();
+
+    loader.load("/thinking/scene.gltf", (gltf) => {
+      model = gltf.scene;
+
+      // Position the model
+      model.position.set(0, 0, 0); // Adjust the position as needed
+
+      model.scale.set(0.7, 0.7, 0.7); // This scales the model's height to half while keeping the other dimensions the same
+      // Add the model to the scene
+      scene.add(model);
+
+      // Position the camera
+      camera.position.z = 5;
+
+      // Create an animation loop to make the model spin
+      const animate = () => {
+        requestAnimationFrame(animate);
+
+        // Rotate the model
+        if (model) {
+          model.rotation.x += 0.001;
+          model.rotation.y += 0.001;
+        }
+
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    });
+  });
+  onMount(() => {
+    let model2;
+    // Set up your scene, camera, and renderer as usual
+    const scene2 = new THREE.Scene();
+    const camera2 = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+
+    const ambientLight2 = new THREE.AmbientLight(0xffffff, 1); // Adjust intensity as needed
+    scene2.add(ambientLight2);
+
+    // Create a container div for the renderer
+    const rendererContainer2 = document.createElement("div");
+    rendererContainer2.style.position = "absolute"; // Position it as needed
+    rendererContainer2.style.top = "120%"; // Adjust the vertical position
+    rendererContainer2.style.width = "0.5em"; // Set the desired width
+    rendererContainer2.setAttribute("data-aos", "fade-left");
+
+    rendererContainer2.style.float = "left"; 
+    rendererContainer2.style.height = "1em";
+    document.body.appendChild(rendererContainer2);
+
+    const renderer2 = new THREE.WebGLRenderer({ alpha: true }); // Add { alpha: true }
+    renderer2.setSize(window.innerWidth, window.innerHeight);
+    renderer2.setClearColor(0x000000, 0); // Set clear color to transparent
+    rendererContainer2.appendChild(renderer2.domElement); // Append renderer to the container
+
+    // Load the GLTF model
+    const loader2 = new GLTFLoader();
+
+    loader2.load("/question/scene.gltf", (gltf) => {
+      model2 = gltf.scene;
+
+      // Position the model
+      model2.position.set(0, 0, 0); // Adjust the position as needed
+
+      // Add the model to the scene
+      scene2.add(model2);
+
+      // Position the camera
+      camera2.position.z = 5;
+
+      model2.rotation.x = 2;
+      model2.scale.set(0.7, 0.7, 0.7); // This scales the model's height to half while keeping the other dimensions the same
+
+      // Create an animation loop to make the model spin
+      const animate2 = () => {
+        requestAnimationFrame(animate2);
+
+        // Rotate the model
+        if (model2) {
+          model2.rotation.x += 0.001;
+          model2.rotation.y += 0.001;
+        }
+
+        renderer2.render(scene2, camera2);
+      };
+
+      animate2();
     });
   });
 </script>
@@ -34,19 +150,7 @@
       </p>
     </div>
   </div>
-  <svg
-    id="floater"
-    class="float-center"
-    style="height: 15vh; width: 15vw;float: left"
-    viewBox="0 0 200 200"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fill="#D24318"
-      d="M42.1,-56.3C51.7,-42,54.9,-26.1,54.3,-12.2C53.6,1.7,49,13.7,43.4,26.8C37.9,39.9,31.4,54.2,20.4,59.8C9.4,65.5,-6.1,62.5,-22.3,58C-38.5,53.5,-55.3,47.6,-65.1,35.3C-74.9,23,-77.7,4.4,-75.9,-14.7C-74.1,-33.8,-67.7,-53.5,-54.3,-67.1C-40.9,-80.8,-20.4,-88.4,-2.1,-85.9C16.2,-83.3,32.4,-70.6,42.1,-56.3Z"
-      transform="translate(100 100)"
-    />
-  </svg>
+
   <div class="padb" />
   <div
     data-aos="fade-left"
@@ -55,21 +159,11 @@
   >
     <div class="talktext">
       <p class="">Yep, its a pain.</p>
+
+      <div id="model-container" />
     </div>
   </div>
-  <svg
-    id="floater2"
-    class="float-center2"
-    style="height: 50vh; width: 50vw;float: right"
-    viewBox="0 0 200 200"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fill="#5B2D9C"
-      d="M42.1,-56.3C51.7,-42,54.9,-26.1,54.3,-12.2C53.6,1.7,49,13.7,43.4,26.8C37.9,39.9,31.4,54.2,20.4,59.8C9.4,65.5,-6.1,62.5,-22.3,58C-38.5,53.5,-55.3,47.6,-65.1,35.3C-74.9,23,-77.7,4.4,-75.9,-14.7C-74.1,-33.8,-67.7,-53.5,-54.3,-67.1C-40.9,-80.8,-20.4,-88.4,-2.1,-85.9C16.2,-83.3,32.4,-70.6,42.1,-56.3Z"
-      transform="translate(100 100)"
-    />
-  </svg>
+
   <div class="padb" />
 </main>
 
@@ -77,7 +171,9 @@
   /* General CSS Setup */
   main {
     font-size: 1.5rem;
-    font-family:Inter, sans-serif ;
+    font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+
   }
 
   /* container */
@@ -95,5 +191,12 @@
 
   .padb {
     padding-bottom: 100vh;
+  }
+  .model-container {
+    position: absolute;
+    top: 50%; /* Adjust this to position vertically as needed */
+    left: 50%; /* Adjust this to position horizontally as needed */
+    transform: translate(-50%, -50%); /* Center the container */
+    z-index: 1; /* Ensure the model appears above other elements */
   }
 </style>
