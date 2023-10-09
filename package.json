@@ -27,8 +27,10 @@
 		"@splinetool/loader": "^0.9.446",
 		"animate.css": "^4.1.1",
 		"aos": "^2.3.4",
+		"chart.js": "^4.4.0",
 		"crypto-js": "^4.1.1",
 		"spline": "^0.0.0",
+		"svelte-chartjs": "^3.1.2",
 		"svelte-kit": "^1.2.0",
 		"three": "^0.156.1"
 	}

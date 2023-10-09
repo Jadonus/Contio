@@ -4,7 +4,7 @@
   import { writable, derived } from "svelte/store";
   import { Trash } from "phosphor-svelte";
   import autoAnimate from "@formkit/auto-animate";
-
+let admilink = ''
   // Array to store the submitted dates
   let submittedDates = writable([]);
   let formattedDates = derived(submittedDates, ($submittedDates) => {
@@ -156,10 +156,11 @@
   let runad = false;
   console.log(runad);
   function admin() {
-    let r = (Math.random() + 1).toString(36).substring(7);
-    let admilink = `http://localhost:5173/admin/${r}?link=${generatedLink}`;
-    console.log(admilink);
-  }
+  const encodedLink = generatedLink.replace(/&/g, '%26');
+  let r = (Math.random() + 1).toString(36).substring(7);
+  let admilink = `http://localhost:5173/admin/${r}?link=${encodedLink}`;
+  console.log(admilink);
+}
 
 function toggleAdmin() {
   if (runad) {
@@ -291,11 +292,24 @@ toggleAdmin()
             target="_blank"
             rel="noopener noreferrer"
             id="myInput"
-            on:click|preventDefault={share}
           >
             {`${generatedLink}`}
           </a>
         </h4>
+        {#if runad}
+        <p>Admin Page Link (Don't share this)<p>
+          <h4>
+            <a
+              href={`${admilink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="myInput"
+              on:click|preventDefault={share}
+            >
+              {`${admilink}`}
+            </a>
+          </h4>
+          {/if}
       </article>
     </dialog>
   {/if}
