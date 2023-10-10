@@ -2,9 +2,7 @@
   import { ArrowRight } from "phosphor-svelte";
 </script>
 
-<a class="hover" href="/schedule" role="button"
-  >Start Scheduling <ArrowRight /></a
->
+<a class="" href="/schedule" role="button">Start Scheduling <ArrowRight /></a>
 
 <style>
   .hover:hover {
@@ -16,4 +14,5 @@
   .hover {
     transition: ease-in-out, 0.5s;
   }
+ 
 </style>

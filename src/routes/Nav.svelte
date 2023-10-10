@@ -1,5 +1,6 @@
 <script>
   import { redirect } from "@sveltejs/kit";
+  import { SelectionBackground } from "phosphor-svelte";
 </script>
 
 <link
@@ -10,10 +11,12 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@picocss/pico@next/css/pico.colors.min.css"
 />
-<link rel="preconnect" href="https://fonts.googleapis.com"> 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
+  rel="stylesheet"
+/>
 <html lang="html">
   <div class="hero">
     <nav class="">
@@ -58,6 +61,7 @@
       font-family:  'Inter', sans-serif;
       --pico-font-family: 'Inter', sans-serif;
     }
+
     ::-webkit-scrollbar {
       display: none;
     }
@@ -111,5 +115,16 @@
 
     text-decoration-color: var(--pico-color-violet-500);
     }
+
+/*button {
+  box-shadow: 0px 5px 5px 5px rgb(245, 107, 61, 0.4);
+  background: var(--pico-primary);
+background: linear-gradient(90deg, var(--pico-primary), var(--pico-color-orange-300));
+}
+button:hover {
+  background: linear-gradient(90deg, var(--pico-color-violet-500), var(--pico-color-violet-200)); 
+  border: 0;
+transition:  ease-in-out, 1s
+}*/
   </style>
 </html>

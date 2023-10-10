@@ -20,13 +20,11 @@
       <hgroup class="grid">
         <div>
           <h1 class="" data-aos="zoom-in-right">Contio</h1>
-          <h2 class="larger" data-aos="zoom-in-right">
-            Let's Meet up.
-          </h2>
+          <h2 class="larger" data-aos="zoom-in-right">Let's Meet up.</h2>
           <Link />
         </div>
         <div class="image-container">
-          <img class="" alt="meeting" src="meeting2.svg" />
+          <img alt="meeting" class="neumorphic-svg" src="meeting2.svg" />
         </div>
       </hgroup>
       <div class="vh" />
@@ -82,11 +80,11 @@
     .image-container {
       order: -1;
       margin-left: 50px;
-
       margin-right: 50px;
     }
   }
-
+  img {
+  }
   .mt {
     margin-top: 4em;
   }

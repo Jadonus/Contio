@@ -1,5 +1,11 @@
 <script>
-  import * as THREE from "three";
+  import Rellax from "rellax";
+  import { onMount } from "svelte";
+  onMount(() => {
+    const rellax = new Rellax(".rellax");
+  });
+
+  /* import * as THREE from "three";
   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
   let model; // Define the model variable
@@ -132,36 +138,44 @@
       animate2();
     });
   });
+  */
 </script>
 
 <main>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-  <div
-    data-aos="fade-right"
-    class="talk-bubble tri-right round btm-left"
-    style="float: left;"
-  >
+  <div data-aos="fade-right" class="talk-bubble tri-right round btm-left">
     <div class="talktext">
-      <p class="">
+      <p class="rellax" data-rellax-speed="-2">
         Have you ever <br />needed to <br />schedule a<br /> meeting with<br />
         several people, all <br />with different availibility?
       </p>
+
+      <h1
+        style="
+font-size: 4em;
+      "
+        class="rellax"
+        data-rellax-speed="-1"
+      >
+        ✏️
+      </h1>
     </div>
   </div>
 
   <div class="padb" />
-  <div
-    data-aos="fade-left"
-    class="talk-bubble tri-right round btm-right"
-    style="float: right;"
-  >
-    <div class="talktext">
-      <p class="">Yep, its a pain.</p>
-
-      <div id="model-container" />
-    </div>
+  <div class="talktext">
+    <p data-rellax-speed="2" class="rellax">Yep, its a pain.</p>
+    <h1
+      style="
+font-size: 4em;
+    "
+      data-rellax-speed="1.2"
+      class="rellax"
+    >
+      🤔
+    </h1>
   </div>
 
   <div class="padb" />
@@ -172,31 +186,17 @@
   main {
     font-size: 1.5rem;
     font-family: "Inter", sans-serif;
-  overflow-x: hidden;
-
+    overflow-x: hidden;
   }
 
   /* container */
   /* CSS talk bubble */
-  .float-center {
-    position: absolute;
-    top: 200%;
-    margin-top: 50vh;
+  .talktext {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
   }
-  .float-center2 {
-    position: absolute;
-    top: 380%;
-    margin-top: 50vh;
-  }
-
   .padb {
-    padding-bottom: 100vh;
-  }
-  .model-container {
-    position: absolute;
-    top: 50%; /* Adjust this to position vertically as needed */
-    left: 50%; /* Adjust this to position horizontally as needed */
-    transform: translate(-50%, -50%); /* Center the container */
-    z-index: 1; /* Ensure the model appears above other elements */
+    padding-bottom: 120vh;
   }
 </style>

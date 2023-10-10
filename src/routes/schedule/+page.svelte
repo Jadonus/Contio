@@ -4,7 +4,7 @@
   import { writable, derived } from "svelte/store";
   import { Trash } from "phosphor-svelte";
   import autoAnimate from "@formkit/auto-animate";
-let admilink = ''
+  let admilink = "";
   // Array to store the submitted dates
   let submittedDates = writable([]);
   let formattedDates = derived(submittedDates, ($submittedDates) => {
@@ -156,30 +156,30 @@ let admilink = ''
   let runad = false;
   console.log(runad);
   function admin() {
-  const encodedLink = generatedLink.replace(/&/g, '%26');
-  let r = (Math.random() + 1).toString(36).substring(7);
-  let admilink = `http://contio.vercel.app/admin/${r}?link=${encodedLink}`;
-  console.log(admilink);
-}
-
-function toggleAdmin() {
-  if (runad) {
-    admin(); // Call the admin function
-  } else {
-    console.log("Admin function is not enabled.");
+    const encodedLink = generatedLink.replace(/&/g, "%26");
+    let r = (Math.random() + 1).toString(36).substring(7);
+    let admilink = `http://contio.vercel.app/admin/${r}?link=${encodedLink}`;
+    console.log(admilink);
   }
-}
+
+  function toggleAdmin() {
+    if (runad) {
+      admin(); // Call the admin function
+    } else {
+      console.log("Admin function is not enabled.");
+    }
+  }
   function generateLink() {
     const randomString = generateRandomString(3);
     const dateParams = $submittedDates.map((date) => `date=${date}`).join("&");
     let now = new Date(); // Get the current date and time
     now.setDate(now.getDate() + range); // Add 2 days to it
-    console.log(now)
+    console.log(now);
     const time = now.toISOString(); //
     const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&time=${time}`;
     generatedLink = link; // Store the link for display
     generatedLinkText = generatedLink;
-toggleAdmin()
+    toggleAdmin();
     last = false;
     // Now, let's create the data to send to your backend
     const postData = {
@@ -227,8 +227,6 @@ toggleAdmin()
   function lastmod() {
     last = true;
   }
-
-
 </script>
 
 <Nav />
@@ -292,14 +290,14 @@ toggleAdmin()
             target="_blank"
             rel="noopener noreferrer"
             id="myInput"
-
-              on:click|preventDefault={share}
+            on:click|preventDefault={share}
           >
             {`${generatedLink}`}
           </a>
         </h4>
         {#if runad}
-        <p>Admin Page Link (Don't share this)<p>
+          <p>Admin Page Link (Don't share this)</p>
+          <p />
           <h4>
             <a
               href={`${admilink}`}
@@ -310,7 +308,7 @@ toggleAdmin()
               {`${admilink}`}
             </a>
           </h4>
-          {/if}
+        {/if}
       </article>
     </dialog>
   {/if}
@@ -335,7 +333,7 @@ toggleAdmin()
             >info</a
           >
         </h4>
-        <input class="mb" type="checkbox" bind:checked={runad}  /><label
+        <input class="mb" type="checkbox" bind:checked={runad} /><label
           class="mb">Enable it!</label
         >
         <div class="grid">
@@ -352,7 +350,6 @@ toggleAdmin()
     border-color: var(--pico-color-violet-500);
     border-radius: 50%;
     background-color: var(--pico-color-violet-500);
-
     font-smooth: auto;
   }
   .pop {
