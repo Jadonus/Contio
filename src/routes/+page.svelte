@@ -14,7 +14,7 @@
 </script>
 
 <main>
-  <div class="h rellax" data-rellax-speed="-5">
+  <div class="h">
     <Nav />
 
     <header class="container mt">
