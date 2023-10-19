@@ -96,7 +96,7 @@
     margin-top: 4em;
   }
   .h {
-    background-image: url("cri.svg");
+    background-image: url("/static/cri.svg");
     background-size: cover;
   }
   .vh {
