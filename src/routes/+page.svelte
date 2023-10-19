@@ -96,7 +96,7 @@
     margin-top: 4em;
   }
   .h {
-    background-image: url("Circle Scatter Haikei.svg");
+    background-image: url("cri.svg");
     background-size: cover;
   }
   .vh {
