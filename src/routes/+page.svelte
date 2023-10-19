@@ -62,7 +62,10 @@
   a {
     text-decoration: none;
   }
-
+  .h {
+    background-image: url("/static/cri.svg");
+    background-size: cover;
+  }
   .link-arrow p {
     display: inline-block;
     transition: 0.1s ease-in;
@@ -75,8 +78,11 @@
 
   @media (max-width: 768px) {
     .he {
-      font-size: 7em;
-      margin-top: 1em;
+      font-size: 6em;
+      margin-top: 6.7em;
+    }
+    .h {
+      background-image: none;
     }
     .grid {
       flex-direction: column;
@@ -95,10 +101,7 @@
   .mt {
     margin-top: 4em;
   }
-  .h {
-    background-image: url("/static/cri.svg");
-    background-size: cover;
-  }
+
   .vh {
     padding-top: 75vh;
   }
