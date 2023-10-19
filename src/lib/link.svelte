@@ -13,6 +13,5 @@
   }
   .hover {
     transition: ease-in-out, 0.5s;
-  }
- 
+  } 
 </style>

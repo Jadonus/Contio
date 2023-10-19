@@ -1,5 +1,6 @@
 <script>
   import "animate.css";
+
   import { ChevronsRightIcon } from "svelte-feather-icons";
 
   import Nav from "./Nav.svelte";
@@ -13,19 +14,17 @@
 </script>
 
 <main>
-  <div class="h">
+  <div class="h rellax" data-rellax-speed="-5">
     <Nav />
 
     <header class="container mt">
       <hgroup class="grid">
         <div>
-          <h1 class="" data-aos="zoom-in-right">Contio</h1>
+          <h1 class="he" data-aos="zoom-in-right">Contio</h1>
           <h2 class="larger" data-aos="zoom-in-right">Let's Meet up.</h2>
           <Link />
         </div>
-        <div class="image-container">
-          <img alt="meeting" class="neumorphic-svg" src="meeting2.svg" />
-        </div>
+        <div class="image-container" />
       </hgroup>
       <div class="vh" />
 
@@ -42,6 +41,9 @@
 </main>
 
 <style>
+  .he {
+    font-size: 10em;
+  }
   .h {
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -72,6 +74,10 @@
   }
 
   @media (max-width: 768px) {
+    .he {
+      font-size: 7em;
+      margin-top: 1em;
+    }
     .grid {
       flex-direction: column;
       text-align: center;
@@ -79,14 +85,19 @@
 
     .image-container {
       order: -1;
-      margin-left: 50px;
-      margin-right: 50px;
+      margin-left: 5em;
+      background-size: cover;
+      margin-right: 5em;
     }
   }
   img {
   }
   .mt {
     margin-top: 4em;
+  }
+  .h {
+    background-image: url("Circle Scatter Haikei.svg");
+    background-size: cover;
   }
   .vh {
     padding-top: 75vh;

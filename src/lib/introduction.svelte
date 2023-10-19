@@ -70,7 +70,7 @@
     height: 100vh;
   }
   .tpm {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 
   .textcen {
