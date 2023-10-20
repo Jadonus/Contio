@@ -14,95 +14,69 @@
 </script>
 
 <main>
-  <div class="h">
-    <Nav />
-
-    <header class="container mt">
-      <hgroup class="grid">
-        <div>
-          <h1 class="he" data-aos="zoom-in-right">Contio</h1>
-          <h2 class="larger" data-aos="zoom-in-right">Let's Meet up.</h2>
-          <Link />
-        </div>
-        <div class="image-container" />
-      </hgroup>
-      <div class="vh" />
-
-      <Chatbubble />
-    </header>
-
-    <Introduction />
-
-    <Introfollow />
-    <End />
+  <Nav />
+  <div class="cont grid">
+    <div>
+      <h1>
+        Meeting<br /> Scheduling <br />
+        Made<br />
+        Simple
+      </h1>
+      <a href="/schedule">Try it out</a>
+    </div>
+    <div class="img">
+      <img src="/booking.svg" />
+    </div>
   </div>
-
-  <Footer />
 </main>
 
 <style>
-  .he {
-    font-size: 10em;
-  }
-  .h {
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-  h1 {
-    font-size: 6em;
-
-    font-weight: bolder;
-    font-family: "Inter", sans-serif;
-  }
-  .larger {
-    font-size: 2em;
-
-    font-family: "Inter", sans-serif;
+  .img {
+    order: -1;
+    display: none;
+    margin: 0 auto;
   }
   a {
-    text-decoration: none;
+    background: var(--pico-primary);
+    border-radius: 5rem;
+    padding: 15px;
+    margin: 0.5rem;
+    color: var(--pico-text-color);
   }
-  .h {
-    background-image: url("/static/cri.svg");
-    background-size: cover;
+  h1 {
+    font-size: 4.3rem;
+    margin-top: 2rem;
+    margin-left: 0.5rem;
   }
-  .link-arrow p {
-    display: inline-block;
-    transition: 0.1s ease-in;
-
-    margin-bottom: -10px;
-  }
-  .link-arrow:hover p {
-    transform: translateX(50%);
-  }
-
-  @media (max-width: 768px) {
-    .he {
-      font-size: 6em;
-      margin-top: 6.7em;
+  @media screen and (min-width: 900px) {
+    .cont {
+      margin: 0 5rem;
     }
-    .h {
-      background-image: none;
+    .img {
+      display: block;
+      order: 1;
+      margin-top: 8em;
     }
-    .grid {
-      flex-direction: column;
-      text-align: center;
+    h1 {
+      font-size: 7rem;
     }
-
-    .image-container {
-      order: -1;
-      margin-left: 5em;
-      background-size: cover;
-      margin-right: 5em;
+    a {
+      font-size: 2rem;
+      padding: 1rem;
     }
   }
-  img {
-  }
-  .mt {
-    margin-top: 4em;
+  main {
+    background-color: var(--pico-color-violet-500);
+    height: 100vh;
+    font-family: "Inter", sans-serif;
   }
 
-  .vh {
-    padding-top: 75vh;
+  span {
+    font-weight: bold;
+    transition: opacity 2s;
+  }
+
+  .s {
+    background: red;
   }
 </style>

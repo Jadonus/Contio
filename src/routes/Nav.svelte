@@ -44,7 +44,8 @@
   <style>
     html {
     overflow-x: hidden;
-    underline-color: purple;
+    underline-color: var(--pico-violet-500); 
+
     -webkit::overflow-x: hidden;
     }
     .white {
