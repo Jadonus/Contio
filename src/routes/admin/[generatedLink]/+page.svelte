@@ -1,18 +1,18 @@
 <script>
-  import { page } from '$app/stores';
+  import { page } from "$app/stores";
   import Nav from "../../Nav.svelte";
-  import { onMount } from 'svelte';
-  const genlink = $page.url.searchParams.get('link');
+  import { onMount } from "svelte";
+  const genlink = $page.url.searchParams.get("link");
 
   const slug = $page.params.generatedLink;
-// Get the entire query string
-const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
+  // Get the entire query string
+  const apiUrl = "https://contio-backend.vercel.app/meeting/admin/";
   let apistuff;
   let dateData = []; // An array to store the date data for the pie chart
   let pieChart;
 
   // Import Chart.js
-  import Chart from 'chart.js/auto';
+  import Chart from "chart.js/auto";
 
   function formatDate(isoDate) {
     const date = new Date(isoDate);
@@ -21,8 +21,8 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
 
   // Function to create or update the chart
   function createOrUpdateChart() {
-    const ctx = pieChart.getContext('2d');
-    const colors = ['#7540BF', '#006D46', '#006D46', '#FF33E3', '#33E3FF']; // Define colors here
+    const ctx = pieChart.getContext("2d");
+    const colors = ["#7540BF", "#006D46", "#006D46", "#FF33E3", "#33E3FF"]; // Define colors here
 
     // Destroy the previous chart instance if it exists
     if (pieChart.chart) {
@@ -31,15 +31,16 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
 
     // Create a new chart
     pieChart.chart = new Chart(ctx, {
-      type: 'pie',
+      type: "pie",
       data: {
-        labels: dateData.map(date => formatDate(date)),
-        datasets: [{
-          data: dateData.length > 0 ? Array(dateData.length).fill(1) : [],
-          backgroundColor: colors,
-          borderWidth: 0, // Set borderWidth to 0 to remove the border
-
-        }],
+        labels: dateData.map((date) => formatDate(date)),
+        datasets: [
+          {
+            data: dateData.length > 0 ? Array(dateData.length).fill(1) : [],
+            backgroundColor: colors,
+            borderWidth: 0, // Set borderWidth to 0 to remove the border
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -50,29 +51,33 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
 
   // Create the initial empty chart
   onMount(() => {
-    const ctx = pieChart.getContext('2d');
+    const ctx = pieChart.getContext("2d");
     pieChart.chart = new Chart(ctx, {
-      type: 'pie',
+      type: "pie",
       data: {
         labels: [],
-        datasets: [{
-          data: [],
-          backgroundColor: [],
-        }],
+        datasets: [
+          {
+            data: [],
+            backgroundColor: [],
+          },
+        ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
       },
     });
+
+    console.log(dateData);
   });
 
   onMount(async () => {
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ link: genlink }),
       });
@@ -84,16 +89,16 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
 
         // Extract the date data for the pie chart
         if (Array.isArray(data.data)) {
-          dateData = data.data.map(item => item.Date);
+          dateData = data.data.map((item) => item.Date);
 
           // Call the createOrUpdateChart function when data is available
           createOrUpdateChart();
         }
       } else {
-        console.error('Fetch request failed with status:', response.status);
+        console.error("Fetch request failed with status:", response.status);
       }
     } catch (error) {
-      console.error('Error during fetch:', error);
+      console.error("Error during fetch:", error);
     }
   });
 </script>
@@ -103,12 +108,11 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
   <div class="container">
     <h1>Admin Info</h1>
 
-          {#if apistuff && Array.isArray(apistuff.data) && apistuff.data.length > 0}
-<p>{apistuff.data.length} Response(s)</p>
-
-          {:else}
-          <p>No Responses!</p>
-          {/if}
+    {#if apistuff && Array.isArray(apistuff.data) && apistuff.data.length > 0}
+      <p>{apistuff.data.length} Response(s)</p>
+    {:else}
+      <p>No Responses!</p>
+    {/if}
     <div class="pie-chart">
       <canvas bind:this={pieChart} />
     </div>
@@ -139,8 +143,6 @@ const apiUrl = 'https://contio-backend.vercel.app/meeting/admin/';
     </details>
   </div>
 </main>
-
-
 
 <style>
   /* Add your CSS styles for the pie chart container if needed */
