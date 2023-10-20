@@ -158,7 +158,7 @@
   function admin() {
     const encodedLink = generatedLink.replace(/&/g, "%26");
     let r = (Math.random() + 1).toString(36).substring(7);
-    let admilink = `http://contio.vercel.app/admin/${r}?link=${encodedLink}`;
+    admilink = `https://contio.vercel.app/admin/${r}?link=${encodedLink}`;
     console.log(admilink);
   }
 
@@ -239,6 +239,7 @@
     <div>
       <input
         type="datetime-local"
+        placeholder="Pick Some dates."
         min={new Date().toISOString().slice(0, 16)}
       />
     </div>
@@ -297,15 +298,14 @@
         </h4>
         {#if runad}
           <p>Admin Page Link (Don't share this)</p>
-          <p />
           <h4>
             <a
-              href={`${admilink}`}
+              href={admilink}
               target="_blank"
               rel="noopener noreferrer"
               id="myInput"
             >
-              {`${admilink}`}
+              {admilink}
             </a>
           </h4>
         {/if}
@@ -333,9 +333,8 @@
             >info</a
           >
         </h4>
-        <input class="mb" type="checkbox" bind:checked={runad} /><label
-          class="mb">Enable it!</label
-        >
+        <input name="check" class="mb" type="checkbox" bind:checked={runad} />
+        <label for="check">Enable it!</label>
         <div class="grid">
           <button on:click={generateLink}>Generate My Link!</button>
         </div>
@@ -371,5 +370,8 @@
   }
   .mb {
     margin-bottom: 1rem;
+  }
+  dialog[open] {
+    overflow: auto;
   }
 </style>
