@@ -18,7 +18,7 @@
   <div class="cont grid">
     <div>
       <h1>Meeting Scheduling Made Simple</h1>
-      <a href="/schedule">Try it out</a>
+      <a href="/schedule">Start Scheduling</a>
     </div>
     <div class="img">
       <img src="/booking.svg" />
