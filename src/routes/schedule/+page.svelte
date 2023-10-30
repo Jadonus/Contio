@@ -1,34 +1,31 @@
 <script>
+  //MEETING CREATION PAGE
   import Nav from "../Nav.svelte";
   import { onMount } from "svelte";
   import { writable, derived } from "svelte/store";
   import { Trash } from "phosphor-svelte";
   import autoAnimate from "@formkit/auto-animate";
   let admilink = "";
-  // Array to store the submitted dates
   let submittedDates = writable([]);
   let formattedDates = derived(submittedDates, ($submittedDates) => {
     return $submittedDates.map((date) => formatDateTime(date));
   });
 
   let generatedLink = "";
-  // Function to handle date submission
   function submitDate(event) {
     const selectedDateTime = event.target.value;
 
-    // Check if the input is not empty and not the default empty value
     if (selectedDateTime && selectedDateTime !== "1970-01-01T00:00") {
       submittedDates.update((dates) => {
-        return [...dates, selectedDateTime]; // Update the submittedDates store
+        return [...dates, selectedDateTime];
       });
 
-      // Format the newly submitted date and add it to the formattedDates array
       const formattedDate = formatDateTime(selectedDateTime);
       formattedDates.update((dates) => {
-        return [...dates, formattedDate]; // Update the formattedDates store
+        return [...dates, formattedDate];
       });
 
-      event.target.value = ""; // Clear the input after adding
+      event.target.value = "";
     }
   }
 
@@ -38,7 +35,7 @@
       if (index !== -1) {
         dates.splice(index, 1);
       }
-      return [...dates]; // Return a new array to trigger reactivity
+      return [...dates];
     });
   }
 
@@ -61,7 +58,6 @@
     dateInput.addEventListener("blur", submitDate);
   });
 
-  // Function to generate a random string
   const randomWords = [
     "advertise",
     "arise",
@@ -115,7 +111,6 @@
     "accompany",
   ];
 
-  // Function to generate random string from random words
   function generateRandomString(length) {
     let result = "";
     for (let i = 0; i < length; i++) {
@@ -125,7 +120,6 @@
     return result;
   }
 
-  // Function to generate the link
   let generatedLinkText = "";
 
   let range = 2;
@@ -152,7 +146,6 @@
     }
   }
   let email = "";
-  // Inside your generateLink function, after generating the link:
   let runad = false;
   console.log(runad);
   function admin() {
@@ -164,7 +157,7 @@
 
   function toggleAdmin() {
     if (runad) {
-      admin(); // Call the admin function
+      admin();
     } else {
       console.log("Admin function is not enabled.");
     }
@@ -172,16 +165,15 @@
   function generateLink() {
     const randomString = generateRandomString(3);
     const dateParams = $submittedDates.map((date) => `date=${date}`).join("&");
-    let now = new Date(); // Get the current date and time
-    now.setDate(now.getDate() + range); // Add 2 days to it
+    let now = new Date();
+    now.setDate(now.getDate() + range);
     console.log(now);
-    const time = now.toISOString(); //
+    const time = now.toISOString();
     const link = `https://contio.vercel.app/schedule/${randomString}?${dateParams}&time=${time}`;
-    generatedLink = link; // Store the link for display
+    generatedLink = link;
     generatedLinkText = generatedLink;
     toggleAdmin();
     last = false;
-    // Now, let's create the data to send to your backend
     const postData = {
       timeOfRequest: new Date().toISOString(),
       generatedLink: generatedLink,
@@ -189,11 +181,9 @@
       sentime: range,
     };
 
-    // Make the POST request
     makePostRequest(postData);
   }
 
-  // Function to close the modal
   function closeModal() {
     const modal = document.querySelector("dialog[open]");
     if (modal) {

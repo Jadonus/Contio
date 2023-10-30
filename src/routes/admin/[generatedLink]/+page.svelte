@@ -1,14 +1,14 @@
 <script>
+  //ADMIN PAGE
   import { page } from "$app/stores";
   import Nav from "../../Nav.svelte";
   import { onMount } from "svelte";
   const genlink = $page.url.searchParams.get("link");
 
   const slug = $page.params.generatedLink;
-  // Get the entire query string
   const apiUrl = "https://contio-backend.vercel.app/meeting/admin/";
   let apistuff;
-  let dateData = []; // An array to store the date data for the pie chart
+  let dateData = [];
   let pieChart;
   import Chart from "chart.js/auto";
 
@@ -17,26 +17,22 @@
     return date.toLocaleString();
   }
 
-  // Function to create or update the chart
   function createOrUpdateChart() {
     const ctx = pieChart.getContext("2d");
-    const colors = ["#7540BF", "#006D46", "#006D46", "#FF33E3", "#33E3FF"]; // Define colors here
-
-    // Destroy the previous chart instance if it exists
+    const colors = ["#7540BF", "#006D46", "#006D46", "#FF33E3", "#33E3FF"];
     if (pieChart.chart) {
       pieChart.chart.destroy();
     }
 
-    // Create a new chart
     pieChart.chart = new Chart(ctx, {
       type: "pie",
       data: {
-        labels: apistuff.data.map((item) => formatDate(item.Date)), // Use names as labels
+        labels: apistuff.data.map((item) => formatDate(item.Date)),
         datasets: [
           {
-            data: apistuff.data.map((item) => 1), // Set all data points to 1
+            data: apistuff.data.map((item) => 1),
             backgroundColor: colors,
-            borderWidth: 0, // Set borderWidth to 0 to remove the border
+            borderWidth: 0,
           },
         ],
       },
@@ -46,7 +42,6 @@
       },
     });
   }
-  // Create the initial empty chart
   onMount(() => {
     console.log(dateData);
     const ctx = pieChart.getContext("2d");
@@ -83,11 +78,9 @@
         console.log(data);
         apistuff = data;
 
-        // Extract the date data for the pie chart
         if (Array.isArray(data.data)) {
           dateData = data.data.map((item) => item.Date);
 
-          // Call the createOrUpdateChart function when data is available
           createOrUpdateChart();
         }
       } else {

@@ -66,8 +66,6 @@
     ::-webkit-scrollbar {
       display: none;
     }
-    /* Orange color for light color scheme (Default) */
-    /* Can be forced with data-theme="light" */
     [data-theme="light"],
     :root:not([data-theme="dark"]) {
       --pico-text-selection-color: rgba(244, 93, 44, 0.25);
@@ -80,8 +78,6 @@
       --pico-primary-inverse: #fff;
     }
 
-    /* Orange color for dark color scheme (Auto) */
-    /* Automatically enabled if user has Dark mode enabled */
     @media only screen and (prefers-color-scheme: dark) {
       :root:not([data-theme]) {
         --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
@@ -97,8 +93,6 @@
       }
     }
 
-    /* Orange color for dark color scheme (Forced) */
-    /* Enabled if forced with data-theme="dark" */
     [data-theme="dark"] {
       --pico-text-selection-color: rgba(245, 107, 61, 0.1875);
       --pico-primary: #f56b3d;

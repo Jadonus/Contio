@@ -1,6 +1,6 @@
 <script>
   import "animate.css";
-
+  //HOME PAGE
   import { ChevronsRightIcon } from "svelte-feather-icons";
 
   import Nav from "./Nav.svelte";
